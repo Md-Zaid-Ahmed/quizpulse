@@ -43,6 +43,19 @@ services:
       - mongodb
     networks:
       - quizpulse-network
+    
+  quiz-service:
+    build: ./quiz-service
+    container_name: quizpulse-quiz-service
+    environment:
+      - MONGO_URI=mongodb://admin:password@mongodb:27017/quiz_db?authSource=admin
+      - JWT_SECRET=zaid
+    ports:
+      - "3002:3002"
+    depends_on:
+      - mongodb
+    networks:
+      - quizpulse-network
 
 #Networks & Volumes
 networks:
